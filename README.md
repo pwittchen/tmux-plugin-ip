@@ -1,2 +1,2 @@
 # tmux-plugin-ip
-tmux plugin showing IP
+tmux plugin showing IP number
