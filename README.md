@@ -1,7 +1,7 @@
 # tmux-plugin-ip
 tmux plugin showing IP number
 
-*please note*: this script is adjusted to my personal laptop and OS (ThinkPad T470s, Ubuntu 17.10) and *may not* work in other configurations. Feel free to adjust it to your needs.
+**please note**: this script is adjusted to my personal laptop and OS (ThinkPad T470s, Ubuntu 17.10) and **may not** work in other configurations. Feel free to adjust it to your needs.
 
 Installation
 ------------
