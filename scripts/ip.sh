@@ -4,44 +4,34 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/helpers.sh"
 
-function get_ip() {
-    ip=$(ifconfig | grep -A 1 $netInterface | tail -1 | cut -d ':' -f 2 | cut -d ' ' -f 1)
+# please note: this plugin is adjusted for my laptop only right now (thinkpad t470s, Ubuntu 17.10)
+# it may be improved in the future
+
+function get_ip_wlan() {
+    ip="$(ifconfig | grep broadcast | awk '{print $2}')"
 }
 
-# it's my SAP specific config
-function get_ip_corpo() {
-    ip=$(ifconfig | grep -A 1 'en5' | tail -1 | awk '{print $2}')
+function get_ip_eth() {
+    ip="$(ifconfig | grep ether | awk '{print $2}')"
+    if [[ $ip != *"."* ]]; then
+        ip="not connected"
+    fi
 }
 
 function print_ip() {
-  netInterface='wlan0'
-  get_ip
-
-  if [ ! -z "$ip" ]; then
-    if [[ $ip == *.* ]] ; then
-      echo $ip
-      exit
-    fi
-  else
-      netInterface='eth0'
-      get_ip
-      if [ ! -z "$ip" ]; then
-        if [[ $ip == *.* ]] ; then
-          echo $ip
-          exit
+    get_ip_wlan
+    if [ ! -z "$ip" ]; then
+        echo "$ip"
+        exit
+    else
+        get_ip_eth
+        if [ ! -z "$ip" ]; then
+            echo $ip
         fi
-      else
-          get_ip_corpo
-          if [ ! -z "$ip" ]; then
-            if [[ $ip == *.* ]] ; then
-              echo $ip
-              exit
-            fi
-          fi
-      fi
-  fi
+        exit
+    fi
 
-  echo "not connected"
+    echo "not connected"
 }
 
 main() {
