@@ -8,7 +8,7 @@ source "$CURRENT_DIR/helpers.sh"
 # it may be improved in the future
 
 function get_ip_wlan() {
-    ip="$(ifconfig | grep broadcast | awk '{print $2}')"
+    ip="$(ifconfig | grep broadcast | awk '{print $2}' | tail -n1)"
 }
 
 function get_ip_eth() {
