@@ -25,7 +25,6 @@ function print_ip() {
   get_ip_wlan
   if [ ! -z "$ip" ]; then
     echo "$ip"
-    exit
   else
     get_ip_eth
     if [ ! -z "$ip" ]; then
@@ -33,7 +32,6 @@ function print_ip() {
     else
       echo "not connected"
     fi
-    exit
   fi
 }
 
