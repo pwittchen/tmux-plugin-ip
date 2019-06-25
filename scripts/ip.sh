@@ -9,7 +9,7 @@ source "$CURRENT_DIR/helpers.sh"
 
 function get_ip_wlan() {
   no_of_broadcasts="$(ifconfig | grep broadcast | wc -l)"
-  if [ $no_of_broadcasts = "2" ]; then
+  if [ $no_of_broadcasts -gt "0" ]; then
     ip="$(ifconfig | grep broadcast | awk '{print $2}' | tail -n1)"
   fi
 }
